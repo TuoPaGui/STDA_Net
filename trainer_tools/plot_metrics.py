@@ -1,51 +1,28 @@
-
-import matplotlib.pyplot as plt
 import os
+import matplotlib.pyplot as plt
 
-save_dir = r'G:\Research\EEG_Project\Template\CodeDir\tools\训练和验证的损失曲线'
-# 训练和验证的精确度和损失曲线
-def plot_metrics(train_losses,val_losses,train_accuracies,val_accuracies):
-    plt.figure(figsize=(12, 5))
+SAVE_DIR = r"G:\Research\EEG_Project\Template\CodeDir\tools\training_validation_curves"
 
-    # 损失曲线
-    plt.subplot(1, 2, 1)
-    plt.plot(train_losses, label='Train Loss')
-    plt.plot(val_losses, label='Val Loss')
-    plt.title('Loss Curve')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
+def plot_metrics(train_losses, val_losses, train_accuracies, val_accuracies, save_dir=SAVE_DIR):
+    # Plot train/val loss and accuracy, then save as PNG
+    os.makedirs(save_dir, exist_ok=True)
 
-    # 精度曲线
-    plt.subplot(1, 2, 2)
-    plt.plot(train_accuracies, label='Train Accuracy')
-    plt.plot(val_accuracies, label='Val Accuracy')
-    plt.title('Accuracy Curve')
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy')
-    plt.legend()
+    fig, ax = plt.subplots(1, 2, figsize=(12, 5))
 
-    # 保存图像
-    plt.tight_layout()
-    plt.savefig(os.path.join(save_dir, 'training_metrics.png'))
+    ax[0].plot(train_losses, label="Train Loss")
+    ax[0].plot(val_losses, label="Val Loss")
+    ax[0].set_title("Loss Curve")
+    ax[0].set_xlabel("Epoch")
+    ax[0].set_ylabel("Loss")
+    ax[0].legend()
 
-    # # 保存为 CSV：记录损失与精度值
-    # os.makedirs(csv_dir, exist_ok=True)
-    # csv_path = os.path.join(save_dir, 'training_validation_metrics.csv')
-    # timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    # header = [f'Run_{timestamp}_Epochs']
-    # # 构造 DataFrame，并保留两位小数
-    # metrics_df = pd.DataFrame({
-    #     'Train_Loss': np.round(self.train_losses, 2),
-    #     'Train_Accuracy': np.round(self.train_accuracies, 2),
-    #     'Val_Loss': np.round(self.val_losses, 2),
-    #     'Val_Accuracy': np.round(self.val_accuracies, 2)
-    # })
-    # # 添加空行和标题
-    # with open(csv_path, 'a', encoding='utf-8-sig') as f:
-    #     f.write('\n')
-    #     f.write(','.join(header) + '\n')
-    # # 写入 CSV 文件（保留两位小数）
-    # metrics_df.to_csv(csv_path, mode='a', index_label='Epoch', float_format='%.2f', encoding='utf-8-sig')
+    ax[1].plot(train_accuracies, label="Train Accuracy")
+    ax[1].plot(val_accuracies, label="Val Accuracy")
+    ax[1].set_title("Accuracy Curve")
+    ax[1].set_xlabel("Epoch")
+    ax[1].set_ylabel("Accuracy")
+    ax[1].legend()
 
-    plt.close()
+    fig.tight_layout()
+    fig.savefig(os.path.join(save_dir, "training_metrics.png"))
+    plt.close(fig)
