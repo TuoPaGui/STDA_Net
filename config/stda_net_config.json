@@ -2,7 +2,7 @@
   "name": "STDA_Net",
   "paths": {
     "data_dir": "./data/MASS/SS3/data_anno_savefiles",
-    "model_path": "./save_model/MASS/SS3/ABFE",
+    "model_path": "./save_model/MASS/SS3/STDAv1",
     "log_dir": "./logs",
     "csv_output_dir": "./tools/output"
   },
