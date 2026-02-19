@@ -133,7 +133,6 @@ class DataPreprocessing:
             print("⚠️ 有效数据不足一个完整段，跳过")
             return
 
-        # 截取完整的段
         label_seq = label_seq[:total_segments * seg_len].reshape(-1, seg_len)
         for ch in self.channel_names:
             valid_data[ch] = valid_data[ch][:total_segments * seg_len].reshape(-1, seg_len)
