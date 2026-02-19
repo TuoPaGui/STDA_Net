@@ -151,8 +151,6 @@ class DataPreprocessing:
 
         assert len(self.labels) == self.data[self.channel_names[0]].shape[0], "标签与数据段不一致！"
 
-        log_message(f"✅ 拼接后保留段数: {len(self.labels)}")
-        print(f"✅ 拼接后最终有效段: {len(self.labels)}，每段 {seg_len} 个采样点")
 
     def data_preprocessing(self):
         self.get_files_names()
