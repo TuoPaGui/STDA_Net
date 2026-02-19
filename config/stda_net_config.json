@@ -1,0 +1,51 @@
+{
+  "name": "STDA_Net",
+  "paths": {
+    "data_dir": "./data/MASS/SS3/data_anno_savefiles",
+    "model_path": "./save_model/MASS/SS3/ABFE",
+    "log_dir": "./logs",
+    "csv_output_dir": "./tools/output"
+  },
+  "trainer": {
+    "batch_size": 256,
+    "num_epochs": 100,
+    "patience": 20,
+    "k_folds": 10,
+    "seed": 66,
+    "class_names": ["W", "N1", "N2", "N3", "REM"]
+  },
+  "model": {
+    "module": "model",
+    "type": "STDA_Net",
+    "args": {
+      "in_channels": 4,
+      "num_classes": 5,
+      "base_filters": 64,
+      "dropout": 0.3
+    }
+  },
+  "loss": {
+    "type": "CrossEntropyLoss",
+    "args": {
+      "reduction": "mean",
+      "label_smoothing": 0.006
+    }
+  },
+  "optimizer": {
+    "type": "Adam",
+    "args": {
+      "lr": 0.0004,
+      "weight_decay": 0.003
+    }
+  },
+  "scheduler": {
+    "type": "ReduceLROnPlateau",
+    "args": {
+      "mode": "min",
+      "factor": 0.8,
+      "patience": 5,
+      "min_lr": 0.0001
+    }
+  }
+}
+
